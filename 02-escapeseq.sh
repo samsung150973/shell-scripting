@@ -5,4 +5,4 @@ echo line2
 echo to enable escape sequnce use -e  with options /t /n
 echo -e "LineX\tLineY"
 echo -e "LineA\nLineB"
-echi -e "LINEa\n\tLINEb"
+echo -e "LINEa\n\tLINEb"
