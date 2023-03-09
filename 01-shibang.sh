@@ -13,3 +13,5 @@
 # ./scriptname
 
 echo Hello
+echo to run the scrip on Gitbash , clone the GitHub directory, 
+# cd to shell-scriptin" ; and run command -> bash -? script name
