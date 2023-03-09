@@ -12,4 +12,4 @@ echo -e "CURRENT date is $(date +%F)"
 # excho man date for more options
 
 # display number of active sessions
-echo "No of active sessions are : $(who | wc -1)"
+echo "No of active sessions are : $(who | wc -l)"
