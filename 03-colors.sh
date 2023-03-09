@@ -16,5 +16,5 @@ echo -e "\e[37m This is in White Colour \e[0m"
 
 # to print background colour
 
-echo -e "\e[43;32m This is in Green Colour Text with Yellow background \e[0m"
+echo -e "\e[43;30m This is in Green Colour Text with Yellow background \e[0m"
 echo -e "\e[41;37m This is in Green Colour Text with Yellow background \e[0m"
