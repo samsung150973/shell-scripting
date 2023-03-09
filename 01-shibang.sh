@@ -14,6 +14,6 @@
 
 echo Hello
 echo to run the script , 
-# clone the GitHub directory on Ec2 instance 
-#cd to shell-scriptig" ; and run command -> bash -? script name
-# git pull will download only the edited content
+echo clone the GitHub directory on Ec2 instance 
+echo CD to shell-scriptig" ; and run command -> bash -? script name
+echo git pull will download only the edited content
