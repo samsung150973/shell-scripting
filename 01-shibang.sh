@@ -13,6 +13,8 @@
 # ./scriptname
 
 echo Hello
-echo to run the script , 
+echo to run the script 
 echo clone the GitHub directory on Ec2 instance 
-echo CD to shell-scriptig" ; and run command -> bash -? scriptname,
+echo CD to shell-scripting and run command -> bash -? scriptname
+echo alias gp="git pull"
+echo gp bash scriptname
