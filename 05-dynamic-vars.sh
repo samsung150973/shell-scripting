@@ -8,4 +8,4 @@ echo -e "today date is \e[37m ${TODAYDATE} \e[0m"
 
 # The date is static. To get current date the command is 
 
-sysdate="CURRENT date is $(date +%F)"
+echo -e "CURRENT date is $(date +%F)"
