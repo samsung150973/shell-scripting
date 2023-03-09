@@ -4,7 +4,7 @@ TODAYDATE="09/03/2023"
 echo "today date is ${TODAYDATE}"
 
 #To print in colours
-echo -e "today date is \e[37m ${TODAYDATE} \e[0m"
+echo -e "today date is \e[31m ${TODAYDATE} \e[0m"
 
 # The date is static. To get current date the command is 
 
