@@ -12,4 +12,8 @@ echo "I am printing the value of c as $c"
 
 echo if a variable is not declared , i will print empty
 
-echo "I am printing value of d which is not declared  as $d"
+echo "I am printing value of d which is not declared  as null or empty $d"
+
+# to supply the variables from command line while executing the command 
+# export varioable=value
+# the export value supplies is in temporary or heat memory. 
