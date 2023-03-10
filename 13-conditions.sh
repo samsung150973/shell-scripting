@@ -16,3 +16,5 @@ case $ACTION in
         echo -e "valid options are \e[32m Start or Stop or restart \g[0m"
         ;;
 esac
+
+# command is  git pull ; script.sh start/stop/restart option as 1st argument 
