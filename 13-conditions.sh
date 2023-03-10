@@ -21,4 +21,4 @@ case $ACTION in
 esac
 
 # command is  git pull ; script.sh start/stop/restart option as 1st argument 
-# after execution if user types $? to know the status of previous comamnd, it will output the user defined code
+# after execution if user types $? to know the status of previous comamnd, it will output the user defined code +command not found
