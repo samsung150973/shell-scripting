@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ACTION=$1
+
+if [ "ACTION"== "start" ] ; then
+    echo "payment starting"
+else 
+    echo "payment status unknown"
+fi 
