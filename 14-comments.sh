@@ -1,10 +1,10 @@
 #!bin/bash
 
 echo "Devops Batch 53"
-echo "Demo of multi line comments
+echo "Demo of multi line comments"
 
 <<COMMENT
 a=10
 echo $a
-echo " I am printing"
+echo " I am printing $a"
 COMMENT
