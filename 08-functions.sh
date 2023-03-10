@@ -16,6 +16,5 @@ sample() {
     echo " first value of uptime command output is  $(uptime | awk -F : '{print $01}')"
     echo " last field of the uptime command output is $(uptime | awk -F : '{print $NF}')"
     echo " load average from uptime is $(uptime | awk -F : '{print $NF}' | awk -F , `{print $1}`)"
-
-sample
 }
+sample
