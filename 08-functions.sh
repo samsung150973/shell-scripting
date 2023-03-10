@@ -11,3 +11,5 @@
 sample() {
     echo " I am a function"
 }
+sample
+sample
