@@ -4,4 +4,6 @@
 # to keep the aliase bespoke for each user , they should be added in 
 # vim ~/.bash_profile
 # add the aliaises on seperate line at the end of the last line on the page
-# these alises will be bespoke for the user logged-in
+# these alises will be bespoke for the user logged-in . a few examples are
+#           alias gp="git pull"
+#           echo "welcome back to DevOps"
