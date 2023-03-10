@@ -9,5 +9,5 @@
 # Declaring a function
 
 sample() {
-    echo " I am a function
+    echo " I am a function"
 }
