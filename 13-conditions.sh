@@ -9,7 +9,7 @@ case $ACTION in
         ;;
     stop)
         echo "stop payment service"
-        exit 2 
+        exit 2 # exit code defined by user as 2 after the condition is true
         ;;
     restart)
         echo "restart the payment service"
@@ -17,6 +17,7 @@ case $ACTION in
         ;;
     *)
         echo -e "valid options are \e[32m Start or Stop or restart \g[0m"
+        exit 4
         ;;
 esac
 
