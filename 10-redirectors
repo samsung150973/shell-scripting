@@ -1,0 +1,8 @@
+#!/bin/bash
+# comamnd output redirected to a file
+# command > filename.txt - overwrites the contents of the file
+# command >> filename.txt - appends output to the file
+# output is two types standard output & standard error
+# to capture only the standard error then command is
+# command 2> filename.txt - overwrites the file
+# command 2>> filename.txt - appends  the errors to the file
