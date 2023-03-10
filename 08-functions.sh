@@ -18,3 +18,4 @@ sample() {
     echo " first value from load average is $(uptime | awk -F : '{print $NF}' | awk -F , '{print $1}')"
 }
 sample
+
