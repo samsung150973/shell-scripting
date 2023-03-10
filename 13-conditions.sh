@@ -9,7 +9,7 @@ case $ACTION in
     stop)
         echo "stop payment service"
         ;;
-    restart
+    restart)
         echo "restart the payment service"
         ;;
     *)
