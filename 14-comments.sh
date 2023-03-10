@@ -6,5 +6,5 @@ echo "Demo of multi line comments
 <<COMMENT
 a=10
 echo $a
-echo "I am printing value of"
+echo " I am printing"
 COMMENT
