@@ -11,4 +11,4 @@ echo  "Name of the current script is : $3"
 # then run again the scipt to see the values are assigned
 echo "supplied variables are $*"
 echo "supplied variables are $@"
-echi "process id of the current process $$"
+echo "process id of the current process $$"
