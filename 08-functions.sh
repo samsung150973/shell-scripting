@@ -9,7 +9,7 @@
 # Declaring a function
 
 sample() {
-    echo " I am a function"
+    echo " I am a function named sample"
     echo " Today date is $(date +%F)"
     echo " system uptime is $(uptime)"
     echo " awk -F is a function used with field seperator"
