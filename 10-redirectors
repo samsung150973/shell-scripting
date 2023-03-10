@@ -6,3 +6,4 @@
 # to capture only the standard error then command is
 # command 2> filename.txt - overwrites the file
 # command 2>> filename.txt - appends  the errors to the file
+# to capture standard and errors is --command &> filename-- or ---command &>> filename 
