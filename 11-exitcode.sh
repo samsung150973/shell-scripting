@@ -3,3 +3,4 @@
 # $?
 # exit code 0 -> successful 
 # exit code 1 - 255 error code (partial success, complete failure)
+# makes debugging easy
