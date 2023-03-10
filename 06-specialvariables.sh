@@ -10,5 +10,6 @@ echo  "Name of the current script is : $3"
 # when the command is executed , supply the values to 1,2,3 as bash -06-specialvariables.sh 100 200 300
 # then run again the scipt to see the values are assigned
 echo "supplied variables are $*"
+echo "total number of argumanets / values supplies on command line $#"
 echo "supplied variables are $@"
-echo "process id of the current process $$"
+echo "current process id $$"
