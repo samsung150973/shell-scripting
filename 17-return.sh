@@ -15,6 +15,7 @@ stat() {
     echo " first value from load average is $(uptime | awk -F : '{print $NF}' | awk -F , '{print $1}')"
 
     # if you write --exit-- here ; the script execution will stop
+    exit
     # if you erite -- return-- ; the execution of the function stat will stop and , further commands executed
 
     echo "calling sample function"
