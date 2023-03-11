@@ -26,3 +26,20 @@ if command used in 3 ways
         command 4
     fi
 COMMENT
+
+# examples
+
+ACTION=$1
+
+if [ "ACTION"== "start" ] ; then
+    echo "payment starting"
+    exit 0
+
+elif [ "ACTION"=="stop" ] ; then
+    echo "payment stopped"
+    exit 1
+
+else 
+    echo "payment status unknown"
+    exit 2
+fi 
