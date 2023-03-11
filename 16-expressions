@@ -1,4 +1,10 @@
 #!/bin/bash
+# Operators on numbers -eq, -ne , -gt, -ge , -lt, -le
+# Operators on string = , == , !=
+# [-z "$var"] -> if the expected variable is not having any data ( used for strings)
+# [-n "$var"] -> when the expected variable is having data (used for strings)
+# [ -f file ] -> true if the file exists
+# [ -d xyz ] -> true if the directory exists
 
 ACTION=$1
 
