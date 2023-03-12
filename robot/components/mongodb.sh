@@ -69,8 +69,7 @@ status $?
 
 
 echo -n "injecting the $COMPONENT schema"
-cd /tmp/$COMPONENT.main
-# cd mongodb-main
+cd /tmp/$COMPONENT-main
 mongo < catalogue.js &>> $LOGFILE
 mongo < users.js &>> $LOGFILE
 status $?
