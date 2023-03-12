@@ -7,7 +7,7 @@ echo "Frontend automation script"
 # if UID is 0 , it is root user . to get only the UID 0 the command is -- sudo id -u --
 # validating if root user
 
-COMPONENT=frontend
+COMPONENT=frontend # to remove repetion of the name frontend. and also helps not to hardcode the filename
 ID=$(id -u)
 
 if [ "$ID" -ne 0 ] ; then
