@@ -6,6 +6,8 @@ echo "Frontend automation script"
 # initially to verify if you are root user . command -- sudi id -- will show the UID. 
 # if UID is 0 , it is root user . to get only the UID 0 the command is -- sudo id -u --
 # validating if root user
+
+COMPONENT=frontend
 ID=$(id -u)
 
 if [ "$ID" -ne 0 ] ; then
@@ -28,30 +30,30 @@ status() {
 # execute as root user prefix sudo in command line to install ngiix and start the service
 
 echo -n "installing Nginx" #-n will keep the curser in the same line
-yum install nginx -y &>> /tmp/frontend.log
+yum install nginx -y &>> /tmp/$COMPONENT.log
 
 status $?  # this will give the first argument which will be supplied to the stat function $1
 
 # download the HTDOCS content and deploy it under the Nginx path.
-echo -n "Downloding the frontend component"
-curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
+echo -n "Downloding the $COMPONENT component"
+curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 
 status $?
 
 #Deploy in Nginx Default Location.
 
-echo -n "performing cleanup of old frontend content"
+echo -n "performing cleanup of old $COMPONENT content"
 cd /usr/share/nginx/html
-rm -rf * &>> /tmp/frontend.log
+rm -rf * &>> /tmp/$COMPONENT.log
 
 status $?
 
 
 echo -n "copying the downloaded new frontend"
-unzip /tmp/frontend.zip &>> /tmp/frontend.log
-mv frontend-main/* .
+unzip /tmp/$COMPONENT.zip &>> /tmp/$COMPONENT.log
+mv $COMPONENT-main/* .
 mv static/* .
-rm -rf frontend-main README.md
+rm -rf $COMPONENT-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
 status $?
@@ -59,7 +61,7 @@ status $?
 
 # enable Nginx
 echo -n "stating the Nginx service"
-systemctl enable nginx &>> /tmp/frontend.log
+systemctl enable nginx &>> /tmp/$COMPONENT.log
 
 # restart Nginx
 systemctl restart nginx
