@@ -21,9 +21,9 @@ fi
 status() {
 
     if [ $1 -eq 0 ] ; then
-        echo -e " \e[32m successfully installed Nginx \e[0m"
+        echo -e " \e[32m success \e[0m"
     else 
-        echo -e " \e[31m failed installing Nginx \e[0m"
+        echo -e " \e[31m failed  \e[0m"
         exit 2 # assiging exit code 
     fi
 
@@ -65,7 +65,7 @@ status $?
 echo -n "Extracting the $COMPONENT schema"
 cd /tmp
 unzip -o mongodb.zip &>> $LOGFILE # unzip -o will overwrite the file without confirmation
-ststus $?
+status $?
 
 
 echo -n "injecting the $COMPONENT schema"
@@ -73,4 +73,4 @@ cd /tmp/$COMPONENT.main
 # cd mongodb-main
 mongo < catalogue.js &>> $LOGFILE
 mongo < users.js &>> $LOGFILE
-ststus $?
+status $?
