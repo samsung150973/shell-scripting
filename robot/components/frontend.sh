@@ -65,7 +65,7 @@ echo -n "stating the Nginx service"
 systemctl enable nginx &>> $LOGFILE
 
 # restart Nginx
-systemctl restart nginx $LOGFILE
+systemctl restart nginx &>> $LOGFILE
 
 status $?
 
