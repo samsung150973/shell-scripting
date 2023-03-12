@@ -19,9 +19,9 @@ echo -n "installing Nginx" #-n will keep the curser in the same line
 yum install nginx -y &>> /tmp/frontend.log
 
 if [ $? -eq 0 ] ; then
-    echo -e " \e [32m successfully installed Nginx \e[0m"
+    echo -e " \e[32m successfully installed Nginx \e[0m"
 else 
-    echo -e " \e [31m failed installing Nginx \e[0m"
+    echo -e " \e[31m failed installing Nginx \e[0m"
     exit 2 # assiging exit code 
 fi
 
@@ -30,9 +30,9 @@ echo -n "Downloding the frontend component"
 curl -s -L -o /tmp/frontend.zip "<https://github.com/stans-robot-project/frontend/archive/main.zip>"
 
 if [ $? -eq 0 ] ; then
-    echo -e " \e [32m successfully installed frontend \e[0m"
+    echo -e " \e[32m successfully installed frontend \e[0m"
 else 
-    echo -e " \e [31m failed installing frontend \e[0m"
+    echo -e " \e[31m failed installing frontend \e[0m"
     exit 3 # assiging exit code 
 fi
 
@@ -44,9 +44,9 @@ echo -n "performing cleanup of old frontend content"
 cd /usr/share/nginx/html
 rm -rf * &>> /tmp/frontend.log
 if [ $? -eq 0 ] ; then
-    echo -e " \e [32m successfully removed old forntend contents \e[0m"
+    echo -e " \e[32m successfully removed old forntend contents \e[0m"
 else 
-    echo -e " \e [31m failed removing old content \e[0m"
+    echo -e " \e[31m failed removing old content \e[0m"
     exit 4 # assiging exit code 
 fi
 
@@ -58,9 +58,9 @@ rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
 if [ $? -eq 0 ] ; then
-    echo -e " \e [32m successfully copied forntend contents \e[0m"
+    echo -e " \e[32m successfully copied forntend contents \e[0m"
 else 
-    echo -e " \e [31m failed copying \e[0m"
+    echo -e " \e[31m failed copying \e[0m"
     exit 5 # assiging exit code 
 fi
 
@@ -74,9 +74,9 @@ systemctl restart nginx &>> /tmp/frontend.log
 restart Nginx
 
 if [ $? -eq 0 ] ; then
-    echo -e " \e [32m success \e[0m"
+    echo -e " \e[32m success \e[0m"
 else 
-    echo -e " \e [31m failed \e[0m"
+    echo -e " \e[31m failed \e[0m"
     exit 6 # assiging exit code 
 fi
 
