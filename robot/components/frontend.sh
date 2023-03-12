@@ -27,7 +27,7 @@ fi
 
 # download the HTDOCS content and deploy it under the Nginx path.
 echo -n "Downloding the frontend component"
-curl -s -L -o /tmp/frontend.zip "<https://github.com/stans-robot-project/frontend/archive/main.zip>"
+curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
 
 if [ $? -eq 0 ] ; then
     echo -e " \e[32m successfully installed frontend \e[0m"
