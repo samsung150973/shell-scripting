@@ -1,7 +1,7 @@
-#!/bun/bash
+#!/bin/bash
 echo "Frontend automation script"
 
-set -e # exist the prog if any error
+# set -e # exist the prog if any error ( disabled with # as comment for this prog)
 
 # initially to verify if you are root user . command -- sudi id -- will show the UID. 
 # if UID is 0 , it is root user . to get only the UID 0 the command is -- sudo id -u --
@@ -13,7 +13,8 @@ if [ "$ID" -ne 0 ] ; then
     exit 1
 fi
 
-# execute as root user prefix sudo to install ngiix and start the service
+# execute as root user prefix sudo in command line to install ngiix and start the service
+
 echo -n "installing Nginx" #-n will keep the curser in the same line
 yum install nginx -y &>> /tmp/frontend.log
 
