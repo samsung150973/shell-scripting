@@ -6,7 +6,7 @@ echo "Frontend automation script"
 # initially to verify if you are root user . command -- sudi id -- will show the UID. 
 # if UID is 0 , it is root user . to get only the UID 0 the command is -- sudo id -u --
 # validating if root user
-ID=$(id-u)
+ID=$(id -u)
 
 if [ "$ID" -ne 0 ] ; then
     echo -e " \e [31m login as root user \e[0m"
