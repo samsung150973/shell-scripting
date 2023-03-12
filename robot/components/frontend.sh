@@ -30,13 +30,13 @@ status() {
 echo -n "installing Nginx" #-n will keep the curser in the same line
 yum install nginx -y &>> /tmp/frontend.log
 
-stat $?  # this will give the first argument which will be supplied to the stat function $1
+status $?  # this will give the first argument which will be supplied to the stat function $1
 
 # download the HTDOCS content and deploy it under the Nginx path.
 echo -n "Downloding the frontend component"
 curl -s -L -o /tmp/frontend.zip "https://github.com/stans-robot-project/frontend/archive/main.zip"
 
-stat $?
+status $?
 
 #Deploy in Nginx Default Location.
 
@@ -44,7 +44,7 @@ echo -n "performing cleanup of old frontend content"
 cd /usr/share/nginx/html
 rm -rf * &>> /tmp/frontend.log
 
-stat $?
+status $?
 
 
 echo -n "copying the downloaded new frontend"
@@ -54,7 +54,7 @@ mv static/* .
 rm -rf frontend-main README.md
 mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
-stat $?
+status $?
 
 
 # enable Nginx
@@ -64,7 +64,7 @@ systemctl enable nginx &>> /tmp/frontend.log
 # restart Nginx
 systemctl restart nginx
 
-stat $?
+status $?
 
 
 # observations
