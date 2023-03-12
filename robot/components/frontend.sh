@@ -68,7 +68,6 @@ fi
 # enable Nginx
 echo -n "stating the Nginx service"
 systemctl enable nginx &>> /tmp/frontend.log
-systemctl restart nginx &>> /tmp/frontend.log
 
 # restart Nginx
 systemctl restart nginx
