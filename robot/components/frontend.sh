@@ -8,6 +8,7 @@ echo "Frontend automation script"
 # validating if root user
 
 COMPONENT=frontend # to remove repetion of the name frontend. and also helps not to hardcode the filename
+LOGFILE="/tmp/$COMPONENT.log"
 ID=$(id -u)
 
 if [ "$ID" -ne 0 ] ; then
@@ -30,7 +31,7 @@ status() {
 # execute as root user prefix sudo in command line to install ngiix and start the service
 
 echo -n "installing Nginx" #-n will keep the curser in the same line
-yum install nginx -y &>> /tmp/$COMPONENT.log
+yum install nginx -y &>> $LOGFILE
 
 status $?  # this will give the first argument which will be supplied to the stat function $1
 
@@ -44,13 +45,13 @@ status $?
 
 echo -n "performing cleanup of old $COMPONENT content"
 cd /usr/share/nginx/html
-rm -rf * &>> /tmp/$COMPONENT.log
+rm -rf * &>> $LOGFILE
 
 status $?
 
 
 echo -n "copying the downloaded new frontend"
-unzip /tmp/$COMPONENT.zip &>> /tmp/$COMPONENT.log
+unzip /tmp/$COMPONENT.zip &>> $LOGFILE
 mv $COMPONENT-main/* .
 mv static/* .
 rm -rf $COMPONENT-main README.md
@@ -61,7 +62,7 @@ status $?
 
 # enable Nginx
 echo -n "stating the Nginx service"
-systemctl enable nginx &>> /tmp/$COMPONENT.log
+systemctl enable nginx &>> $LOGFILE
 
 # restart Nginx
 systemctl restart nginx
