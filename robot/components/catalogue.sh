@@ -96,7 +96,7 @@ status $?
 
 echo -n "starting the $COMPONENT service"
 systemctl daemon-reload		&>> $LOGFILE
-systemctl start $COMPONENT		&>> $LOGFILE
+systemctl restart $COMPONENT		&>> $LOGFILE
 systemctl enable $COMPONENT 	&>> $LOGFILE
 systemctl status $COMPONENT -l	&>> $LOGFILE
 status $?
