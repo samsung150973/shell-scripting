@@ -52,7 +52,7 @@ status $?
 
 
 # performing daemon reload
-echo -m "performing daemon reload and restart mongo"
+echo -n "performing daemon reload and restart mongo"
 systemctl daemon-reload &>> $LOGFILE
 systemctl restart mongod &>> $LOGFILE
 status $?
