@@ -71,7 +71,7 @@ systemctl enable nginx &>> /tmp/frontend.log
 systemctl restart nginx &>> /tmp/frontend.log
 
 # restart Nginx
-restart Nginx
+restart nginx
 
 if [ $? -eq 0 ] ; then
     echo -e " \e[32m success \e[0m"
