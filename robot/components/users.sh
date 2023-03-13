@@ -88,6 +88,7 @@ status $?
 # 	Update	MONGO_DNSNAME	with MongoDB Server IP	
 
 echo -n "updating the systemd file with DB Details:"
+# below is only different from catalogue and should be updated
 sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service	
 status $?
