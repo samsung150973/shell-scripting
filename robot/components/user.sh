@@ -1,6 +1,4 @@
 #!/bin/bash
-# user is same as catalogue . so copy and change componenet
-
 echo "user automation script"
 
 # set -e # exist the prog if any error ( disabled with # as comment for this prog)
@@ -88,7 +86,6 @@ status $?
 # 	Update	MONGO_DNSNAME	with MongoDB Server IP	
 
 echo -n "updating the systemd file with DB Details:"
-# below is only different from catalogue and should be updated
 sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service	
 status $?
@@ -103,3 +100,4 @@ systemctl restart $COMPONENT		&>> $LOGFILE
 systemctl enable $COMPONENT 	&>> $LOGFILE
 systemctl status $COMPONENT -l	&>> $LOGFILE
 status $?
+		
