@@ -1,16 +1,10 @@
-#!/bin/bash
-echo "user automation script"
+#!bin/bash
 
-# set -e # exist the prog if any error ( disabled with # as comment for this prog)
-
-COMPONENT=user # to remove repetion of the name frontend. and also helps not to hardcode the filename
-APPUSER=roboshop
-
-# initially to verify if you are root user . command -- sudi id -- will show the UID. 
-# if UID is 0 , it is root user . to get only the UID 0 the command is -- sudo id -u --
-# validating if root user
 
 LOGFILE="/tmp/$COMPONENT.log"
+APPUSER=roboshop
+
+# validating if root user
 ID=$(id -u)
 
 if [ "$ID" -ne 0 ] ; then
@@ -30,17 +24,7 @@ status() {
 
 }
 
-		
-# 1	This service is written in NodeJS, Hence need to install NodeJS in the system.	
-echo -n "configurring the NodeJS repo :"
-curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -	&>> $LOGFILE	
-status $?
-
-echo -n "installing Node JS :"
-yum install nodejs -y		&>> $LOGFILE
-status $?
-
-
+CREATE_USER() {
 # Creating a user roboshop normal user account ( first check if the user account exist)
 
 id $APPUSER &>> $LOGFILE
@@ -51,12 +35,9 @@ if [ $? -ne 0 ] ; then
     useradd $APPUSER  &>> $LOGFILE
     status $?
 fi
+}
 
-		
-# 1	So let's switch to the	
-# 	roboshop	
-# 	user and run the following commands.	
-
+DOWNLOAD_AND_EXTRACT(){
 echo -n "downloading the $COMPONENT component"
 curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/stans-robot-project/$COMPONENT/archive/main.zip"
 status $?
@@ -74,28 +55,56 @@ echo -n "moving the file and changing the permissions for $APPUSER"
 mv /home/$APPUSER/$COMPONENT-main /home/$APPUSER/$COMPONENT	
 chown -R $APPUSER:$APPUSER /home/$APPUSER/$COMPONENT
 status $?
+}
+
+NPM_INSTALL(){
+    # installing application
+    echo -n "installing application"
+    cd /home/$APPUSER/$COMPONENT		
+    npm install		&>> $LOGFILE
+    status $?
+}
 
 
-# installing application
-echo -n "installing application"
-cd /home/$APPUSER/$COMPONENT		
-npm install		&>> $LOGFILE
-status $?
-		
-# 1	Update SystemD file with correct IP addresses	
-# 	Update	MONGO_DNSNAME	with MongoDB Server IP	
+CONFIG_SVC() {
+
+# 1	Update SystemD file with correct IP addresses. Update	MONGO_DNSNAME	with MongoDB Server IP	
 
 echo -n "updating the systemd file with DB Details:"
-sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
+sed -i -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service	
 status $?
 
-
-
 # Now, lets set up the service with systemctl.	
-
 echo -n "starting the $COMPONENT service"
 systemctl daemon-reload		&>> $LOGFILE
 systemctl restart $COMPONENT		&>> $LOGFILE
 systemctl enable $COMPONENT 	&>> $LOGFILE
 systemctl status $COMPONENT -l	&>> $LOGFILE
+status $?
+}
+
+
+NODEJS() {
+# 1	This service is written in NodeJS, Hence need to install NodeJS in the system.	
+    echo -n "configurring the NodeJS repo :"
+    curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -	&>> $LOGFILE	
+    status $?
+
+    echo -n "installing Node JS :"
+    yum install nodejs -y		&>> $LOGFILE
+    status $?
+
+# calling create user function
+CREATE_USER
+
+# calling Download And Extract function
+DOWNLOAD_AND_EXTRACT
+
+# Calling NPM Install
+NPM_INSTALL
+
+# calling config Service
+CONFIG_SVC
+
+}
