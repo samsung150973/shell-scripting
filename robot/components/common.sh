@@ -94,7 +94,7 @@ MVN_PACKAGE() {
 
 JAVA() {
     echo -n "Install Maven :"
-    yum install java -y &>>LOGFILE
+    yum install maven -y &>>LOGFILE
     status $?
 
 # calling creae -user function
