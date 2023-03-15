@@ -71,7 +71,7 @@ CONFIG_SVC() {
 # 1	Update SystemD file with correct IP addresses. Update	MONGO_DNSNAME	with MongoDB Server IP	
 
 echo -n "updating the systemd file with DB Details:"
-sed -i -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
+sed -i -e 's/DBHOST/mysql.roboshop.internal/' -e 's/CARTENDPOINT/CART.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/CATALOGUE_ENDPOINT/catalogue.roboshop.internal/' -e 's/REDIS_ENDPOINT/redis.roboshop.internal/' -e 's/MONGO_ENDPOINT/mongodb.roboshop.internal/' -e 's/MONGO_DNSNAME/mongodb.roboshop.internal/' /home/$APPUSER/$COMPONENT/systemd.service
 mv /home/$APPUSER/$COMPONENT/systemd.service /etc/systemd/system/$COMPONENT.service	
 status $?
 
@@ -82,6 +82,33 @@ systemctl restart $COMPONENT		&>> $LOGFILE
 systemctl enable $COMPONENT 	&>> $LOGFILE
 systemctl status $COMPONENT -l	&>> $LOGFILE
 status $?
+}
+
+MVN_PACKAGE() {
+    echo -n "creating the $COMPONENT package :"
+    cd /home/$APPUSER/$COMPONENT/
+    mvn clean package &>> LOGFILE
+    mv target/shipping-1.0.jar shipping.jar
+    status $?
+}
+
+JAVA() {
+    echo -n "Install Maven :"
+    yum install java -y &>>LOGFILE
+    status $?
+
+# calling creae -user function
+CREATE_USER
+
+# calling Download And Extract function
+DOWNLOAD_AND_EXTRACT
+
+# calling maven package
+MVN_PACKAGE
+
+# calling config Service
+CONFIG_SVC
+
 }
 
 
