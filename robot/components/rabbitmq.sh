@@ -21,7 +21,7 @@ status $?
 
 echo -n "starting $COMPONENT :"
 systemctl enable rabbitmq.server  &>> $LOGFILE
-systemctl restart rabbitmq.server &>> $LOGFILE
+systemctl start rabbitmq.server &>> $LOGFILE
 status $?
 
 echo -n "creating $COMPONENT Application User :"
