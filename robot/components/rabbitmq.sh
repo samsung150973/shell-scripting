@@ -20,8 +20,8 @@ yum install rabbitmq-server -y &>> $LOGFILE
 status $?
 
 echo -n "starting $COMPONENT :"
-systemctl enable rabbitmq.server  &>> $LOGFILE
-systemctl start rabbitmq.server &>> $LOGFILE
+systemctl enable rabbitmq-server  &>> $LOGFILE
+systemctl start rabbitmq-server &>> $LOGFILE
 status $?
 
 
