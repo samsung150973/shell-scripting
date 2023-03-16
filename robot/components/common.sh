@@ -115,7 +115,7 @@ status $?
 USERID=$(id -u roboshop)
 GROUPID=$(id -g roboshop)
 echo -n "updating the $COMPONENT.ini file"
-sed -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
+sed -i "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
 
 # calling config Service
 CONFIG_SVC
