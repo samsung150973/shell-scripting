@@ -94,7 +94,7 @@ MVN_PACKAGE() {
 
 
 PYTHON(){
-echi -n "Installing python and dependencies" 
+echo -n "Installing python and dependencies" 
 yum install python36 gcc python3-devel -y &>> $LOGFILE
 status $?
 
@@ -104,7 +104,7 @@ CREATE_USER
 # calling Download And Extract function
 DOWNLOAD_AND_EXTRACT
 
-echo -n " Installing $COMPONENT 
+echo -n " Installing $COMPONENT "
 cd /home/roboshop/$COMPONENT/
 pip3 install -r requirements.txt &>>LOGFILE
 status $?

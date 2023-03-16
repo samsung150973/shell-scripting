@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "catalogue automation script"
+echo "payment automation script"
 
 # set -e # exist the prog if any error ( disabled with # as comment for this prog)
 
