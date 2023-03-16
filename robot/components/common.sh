@@ -112,8 +112,8 @@ status $?
 
 # command $ cat payment/payment.ini will show the UID & GID as 1
 # command $ id roboshop will show the uid  & GID as 1001 . this value should be mapped on payment.ini file
-USERID =$(id -u roboshop)
-GROUPID =$(id -g roboshop)
+USERID=$(id -u roboshop)
+GROUPID=$(id -g roboshop)
 echo -n "updating the $COMPONENT.ini file"
 sed -e "/^uid/ c uid=${USERID}" -e "/^gid/ c gid=${GROUPID}" /home/$APPUSER/$COMPONENT/$COMPONENT.ini
 
