@@ -59,34 +59,16 @@ if [ $? -eq 0 ] ; then
     status $?
 fi
 
+# dowload and injest the schema
 
-# ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/584e54a9-29fa-4246-9655-e5666a18119b/Untitled.png)
+echo -n "dowloading the $COMPONENT schema :"
+curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip" &>> $LOGFILE
+status $?
 
-# ## **Setup Needed for Application.**
+echo -n "extracting the schema"
+cd /tmp
+unzip $COMPONENT.zip
 
-# As per the architecture diagram, MySQL is needed by
-
-# - Shipping Service
-
-# So we need to load that schema into the database, So those applications will detect them and run accordingly.
-
-# To download schema, Use the following command
-
-# ```bash
-# # curl -s -L -o /tmp/mysql.zip "https://github.com/stans-robot-project/mysql/archive/main.zip"
-# ```
-
-# Load the schema for mysql. This file contains the list of COUNTRIES, CITIES and their PINCODES. This will be helpful in doing the shipping charges calculation which is based on the distance the product is shippied
-
-# ```bash
-# # cd /tmp
-# # unzip mysql.zip
-# # cd mysql-main
-# # mysql -u root -pRoboShop@1 <shipping.sql
-# ```
-
-# ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/92634964-7621-49c9-ace2-fc8e47073237/Untitled.png)
-
-# - 😀 We are good with MySQL now. Next move to the `SHIPPING` Component.
-
-# `SHIPPING` consumes the information from MySQL.
+echo -n "inject the schema"
+mysql -u root -pRoboShop@1 <shipping.sql &>> $LOGFILE
+status $?
