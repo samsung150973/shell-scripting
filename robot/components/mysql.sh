@@ -27,7 +27,7 @@ status $?
 # 1. Now a default root password will be generated and can be seen in the log file.
 # # grep temp /var/log/mysqld.log ( Copy that password ) - or below code willto capture the password in a variable
 echo -n " fetching the default password"
-DEFAULT_ROOT_PWD = $(grep "temporary password" /var/log/mysqld.log | awk '{print $NF}')
+DEFAULT_ROOT_PWD=$(grep "temporary password" /var/log/mysqld.log | awk '{print $NF}')
 staus $?
 
 
