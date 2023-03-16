@@ -8,7 +8,7 @@ source components/common.sh
 
 # As per the Application need, we are choosing MySQL 5.7 version. Setup MySQL Repo
 echo -n " configurring the $COMPONENT repo :"
-curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/stans-robot-project/mysql$COMPONENT/main/$COMPONENT.repo
+curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/stans-robot-project/$COMPONENT/main/$COMPONENT.repo
 status $?
 
 # 1. Install MySQL
