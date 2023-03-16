@@ -28,7 +28,7 @@ status $?
 # # grep temp /var/log/mysqld.log ( Copy that password ) - or below code willto capture the password in a variable
 echo -n " fetching the default password"
 DEFAULT_ROOT_PWD=$(grep "temporary password" /var/log/mysqld.log | awk '{print $NF}')
-staus $?
+status $?
 
 
 # Next, We need to change the default root password in order to start using the database service. Use password as `RoboShop@1` . Rest of the options you can choose `No`
