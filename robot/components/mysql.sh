@@ -51,10 +51,13 @@ fi
 # Once after login to MySQL prompt then run this SQL Command. This will uninstall the password validation feature like number of characters, password length, complexty and all. As I don’t want that I’d be uninstalling the `validate_password` plugin
 # using the same logic as above , the validation can be removed
 
-echo -n "un-installing Password Validation Plugin :"
-echo "uninstall plugin validate_password ;"| mysql -uroot -pRoboshop@1 &>> $LOGFILE
-status $?
+echo "show plugins;" | mysql -uroot -pRoboshop@1 &>> $LOGFILE
+if [ $? -eq 0 ] ; then
 
+    echo -n "un-installing Password Validation Plugin :"
+    echo "uninstall plugin validate_password ;"| mysql -uroot -pRoboshop@1 &>> $LOGFILE
+    status $?
+fi
 
 
 # ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/584e54a9-29fa-4246-9655-e5666a18119b/Untitled.png)
