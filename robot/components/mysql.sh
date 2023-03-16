@@ -66,10 +66,10 @@ status $?
 
 echo -n "extracting the schema"
 cd /tmp
-unzip $COMPONENT.zip
+unzip -o /tmp/$COMPONENT.zip
 status $?
 
 echo -n "inject the schema"
-cd /tmp/$COMPONENT-main
+cd $COMPONENT-main
 mysql -uroot -pRoboShop@1 <shipping.sql  &>> $LOGFILE
 status $?
