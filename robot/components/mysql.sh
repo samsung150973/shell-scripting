@@ -69,6 +69,6 @@ cd /tmp
 unzip $COMPONENT.zip
 
 echo -n "inject the schema"
-cd $COMPONENT-main
-mysql -u root -pRoboShop@1 <shipping.sql  &>> $LOGFILE
+cd /tmp/$COMPONENT-main
+mysql -uroot -pRoboShop@1 <shipping.sql  &>> $LOGFILE
 status $?
