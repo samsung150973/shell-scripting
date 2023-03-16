@@ -25,28 +25,37 @@ status $?
 
 
 # 1. Now a default root password will be generated and can be seen in the log file.
-# # grep temp /var/log/mysqld.log
-# ( Copy that password )
+# # grep temp /var/log/mysqld.log ( Copy that password ) - or below code willto capture the password in a variable
+echo -n " fetching the default password"
+DEFAULT_ROOT_PWD = $(grep "temporary password" /var/log/mysqld.log | awk '{print $NF}')
+staus $?
 
-# 1. Next, We need to change the default root password in order to start using the database service. Use password as `RoboShop@1` . Rest of the options you can choose `No`
 
-# ```bash
+# Next, We need to change the default root password in order to start using the database service. Use password as `RoboShop@1` . Rest of the options you can choose `No`
 # # mysql_secure_installation
-# ```
+# to automate changing the password
+echo -n "Password reset of root user :"
+# mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWD}
+#above will initiate the password reset option. below command will actually reset the password
+# ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@1';
+# above two can be combined as below ; with a condition that it should be changed once only
+echo "show databases;" | mysql -uroot -pRoboshop@1 &>> $LOGFILE
+if [ $? -ne 0 ] ; then
 
-# 1. You can check whether the new password is working or not using the following command in MySQL
+    echo -n "Password reset of root user"
+    echo "ALTER USER 'root'@'localhost' IDENTIFIED BY 'Roboshop@1';" | mysql --connect-expired-password -uroot -p${DEFAULT_ROOT_PWD} &>> $LOGFILE
+    status $?
 
-# First let's connect to MySQL
-
-# ```bash
-# # mysql -uroot -pRoboShop@1
-# ```
+fi
 
 # Once after login to MySQL prompt then run this SQL Command. This will uninstall the password validation feature like number of characters, password length, complexty and all. As I don’t want that I’d be uninstalling the `validate_password` plugin
+# using the same logic as above , the validation can be removed
 
-# ```sql
-# > uninstall plugin validate_password;
-# ```
+echo -n "un-installing Password Validation Plugin :"
+echo "uninstall plugin validate_password ;"| mysql -uroot -pRoboshop@1 &>> $LOGFILE
+status $?
+
+
 
 # ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/584e54a9-29fa-4246-9655-e5666a18119b/Untitled.png)
 
