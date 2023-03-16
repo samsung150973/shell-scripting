@@ -67,6 +67,7 @@ status $?
 echo -n "extracting the schema"
 cd /tmp
 unzip $COMPONENT.zip
+status $?
 
 echo -n "inject the schema"
 cd /tmp/$COMPONENT-main
