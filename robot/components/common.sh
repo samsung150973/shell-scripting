@@ -92,6 +92,27 @@ MVN_PACKAGE() {
     status $?
 }
 
+
+PYTHON(){
+echi -n "Installing python and dependencies" 
+yum install python36 gcc python3-devel -y &>> $LOGFILE
+status $?
+
+# calling creae -user function
+CREATE_USER
+
+# calling Download And Extract function
+DOWNLOAD_AND_EXTRACT
+
+echo -n " Installing $COMPONENT 
+cd /home/roboshop/$COMPONENT/
+pip3 install -r requirements.txt &>>LOGFILE
+status $?
+
+}
+
+
+
 JAVA() {
     echo -n "Install Maven :"
     yum install maven -y &>>LOGFILE
