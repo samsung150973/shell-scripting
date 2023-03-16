@@ -53,7 +53,6 @@ fi
 
 echo "show plugins;" | mysql -uroot -pRoboshop@1 &>> $LOGFILE
 if [ $? -eq 0 ] ; then
-
     echo -n "un-installing Password Validation Plugin :"
     echo "uninstall plugin validate_password ;"| mysql -uroot -pRoboshop@1 &>> $LOGFILE
     status $?
