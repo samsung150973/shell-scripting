@@ -69,11 +69,6 @@ NPM_INSTALL(){
 CONFIG_SVC() {
 
 
-update 'CARTHOST with cart server ip
-update 'USERHOST with cart server ip
-update 'AMQPHOST with cart server ip
-
-
 # 1	Update SystemD file with correct IP addresses. Update	MONGO_DNSNAME	with MongoDB Server IP	
 
 echo -n "updating the systemd file with DB Details:"
