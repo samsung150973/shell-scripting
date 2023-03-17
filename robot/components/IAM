@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# $ cat ~/.aws/credentials - will show the access key of the user signed in ; if the access key method was used
+
+# IAM Roles 
+# allow ec2 to communicate to s3
+# On AWS -> IAM -> Roles -> Create a Role
+# AWS Service -> EC2 -> ( Next ) - S3 search -> select aws s3 service access
+# now to add the role to the server. One role allowed per server
+# Go to Ec2 instance -> select Server -> Action -> security - Modify IAM role - Select the required IAM role
+#  test the above
+# log in ec2 server on xshell
+# command "aws s3 ls"  ---> will show the s3 instances running
+# command "aws ec2 describe-instances" --> command un-authorised 
+# create a role as "b53 admin"  for Ec2 to communicate with s3 and have administrative access
