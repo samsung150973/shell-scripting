@@ -6,3 +6,6 @@
 AMI_ID=$(aws ec2 describe-images --filters "Name=name, Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId')
 echo -n "AMI ID is $AMI_ID"
 
+# to get AMI ID Only without Quotes
+AMI_ID=$(aws ec2 describe-images --filters "Name=name, Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' | sed -e 's/"//g')
+echo -n "AMI ID without quotes is $AMI_ID"
