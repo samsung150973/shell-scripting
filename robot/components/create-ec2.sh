@@ -28,6 +28,7 @@ echo -n "launching the instnce with $AMI_ID" as AMI
 aws ec2 run-instance --Image-Id $AMI_ID \
                     --instance-type t2.micro \
                     --security-group-ids=$SGID \
+                    --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
                     --tag-specofocations "ResourceType=instance,Tage[{key=Name,Value=$COMPONENT}]"
 
 
