@@ -7,10 +7,11 @@
 # echo -n "AMI ID is $AMI_ID "
 
 
-# Component 
+# COMPONENT value to be supplied by the user ; e.g catalogue, cart, mysql etc 
  if  [ -z "$1" ] ; then 
     echo -e "\e[31m component name required \e[0m \t\t"
     echo -e "sample usage is: $ bash create-ec2.sh user"
+    exit 1
 fi
 
 COMPONENT=$1
@@ -19,9 +20,17 @@ COMPONENT=$1
 AMI_ID=$(aws ec2 describe-images --filters "Name=name, Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' | sed -e 's/"//g')
 echo -n "AMI ID without quotes is $AMI_ID"
 
+# to fetch the security id, to be added to the ec2 instnce . We need the Group ID info from the security group
+SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=b53-allow-all-mm  | jq ".SecurityGroups[].GroupId" | sed -e 's/"//g')
+echo -n "AMI ID without quotes is $SGID"
+
 echo -n "launching the instnce with $AMI_ID" as AMI
 aws ec2 run-instance --Image-Id $AMI_ID \
                     --instance-type t2.micro \
+                    --security-group-ids=$SGID \
                     --tag-specofocations "ResourceType=instance,Tage[{key=Name,Value=$COMPONENT}]"
 
-# COMPONENT value to be supplied by the user ; e.g catalogue, cart, mysql etc
+
+
+
+
