@@ -59,6 +59,11 @@ mv localhost.conf /etc/nginx/default.d/roboshop.conf
 
 status $?
 
+# Update the ip address automatically on the .conf file
+for COMPONENT in cTlogue cart user shipping payment; do
+    echo -n "/updating the proxy details in the reverse proxy file :"
+    sed -e "/$COMPONENT/s/localhost/$COMPONENT.roboshop.internal/" /etc/nginx/default.d/roboshop.conf
+done
 
 # enable Nginx
 echo -n "stating the Nginx service"
