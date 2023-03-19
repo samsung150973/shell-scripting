@@ -35,8 +35,9 @@ IPADDRESS=$(aws ec2 run-instances --image-id $AMI_ID \
 
 
 # search with value component and replace with $COMPONENT and search for IPaddress & change the ipaddress; the value from the file record.json
-sed -e "s/COMPONENT/${COMPONENT}/" -e  "s/IPADDRESS/${IPADDRESS}/" robot/record.json > /tmp/record.json
-aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///record.json | jq 
+echo $IPADDRESS
+sed -e "s/COMPONENT/${COMPONENT}/" -e  "s/IPADDRESS/${IPADDRESS}/" robot/record.json > /tmp/r53.json
+aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/r53.json
 
 
 
