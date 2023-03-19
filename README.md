@@ -15,3 +15,6 @@ For the first time , we need to get the Personal Authentication token and upload
 
 # Bash Scripting Agenda
 To avoid typing the git add. ; git commit -m ; git push ; - we can write in a single command
+
+# jenkings installe
+# jenkins.io
