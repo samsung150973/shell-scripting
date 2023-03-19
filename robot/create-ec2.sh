@@ -31,7 +31,7 @@ IPADDRESS=$(aws ec2 run-instances --image-id $AMI_ID \
                 --instance-type t3.micro \
                 --security-group-ids ${SGID} \
                 --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
-                --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" | jq '.Instances.PrivateIpAddress' | sed -e 's/"//g')
+                --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
 
 # search with value component and replace with $COMPONENT and search for IPaddress & change the ipaddress; the value from the file record.json
