@@ -26,7 +26,7 @@ echo -n "AMI ID without quotes is $AMI_ID"
 SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=b53-allow-all-mm  | jq ".SecurityGroups[].GroupId" | sed -e 's/"//g')
 echo -n "AMI ID without quotes is $SGID"
 
-echo -n "launching the instnce with $AMI_ID" as AMI"
+echo -n "launching the instnce with $AMI_ID as AMI"
 IPADDRESS=$(aws ec2 run-instances --image-id $AMI_ID \
                 --instance-type t3.micro \
                 --security-group-ids ${SGID} \
