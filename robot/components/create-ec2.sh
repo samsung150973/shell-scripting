@@ -20,11 +20,11 @@ COMPONENT=$1
 
 # to get AMI ID Only without Quotes
 AMI_ID=$(aws ec2 describe-images --filters "Name=name, Values=DevOps-LabImage-CentOS7" | jq '.Images[].ImageId' | sed -e 's/"//g')
-echo -n "AMI ID without quotes is $AMI_ID /t/t/t"
+echo -n "AMI ID without quotes is $AMI_ID : /t/t/t"
 
 # to fetch the security id, to be added to the ec2 instnce . We need the Group ID info from the security group
 SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=b53-allow-all-mm  | jq ".SecurityGroups[].GroupId" | sed -e 's/"//g')
-echo -n "AMI ID without quotes is $SGID"
+echo -n "SGID ID without quotes is $SGID : "
 
 echo -n "launching the instance with $AMI_ID as AMI : "
 IPADDRESS=$(aws ec2 run-instances --image-id $AMI_ID \
