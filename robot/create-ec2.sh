@@ -27,17 +27,33 @@ SGID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=b53-all
 echo -n "SGID ID without quotes is $SGID : "
 
 echo -n "launching the instance with $AMI_ID as AMI : "
-IPADDRESS=$(aws ec2 run-instances --image-id $AMI_ID \
-                --instance-type t3.micro \
-                --security-group-ids ${SGID} \
-                --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
-                --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
+
+create_server() {
+
+    echo "****** LAUNCHING $COMPONENT" Server **** "
+
+    IPADDRESS=$(aws ec2 run-instances --image-id $AMI_ID \
+                    --instance-type t3.micro \
+                    --security-group-ids ${SGID} \
+                    --instance-market-options "MarketType=spot, SpotOptions={SpotInstanceType=persistent,InstanceInterruptionBehavior=stop}" \
+                    --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$COMPONENT}]" | jq '.Instances[].PrivateIpAddress' | sed -e 's/"//g')
 
 
-# search with value component and replace with $COMPONENT and search for IPaddress & change the ipaddress; the value from the file record.json
-echo $IPADDRESS
-sed -e "s/COMPONENT/${COMPONENT}/" -e  "s/IPADDRESS/${IPADDRESS}/" robot/record.json > /tmp/record.json
-aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/record.json | jq
+    # search with value component and replace with $COMPONENT and search for IPaddress & change the ipaddress; the value from the file record.json
+    echo $IPADDRESS
+    sed -e "s/COMPONENT/${COMPONENT}/" -e  "s/IPADDRESS/${IPADDRESS}/" robot/record.json > /tmp/record.json
+    aws route53 change-resource-record-sets --hosted-zone-id $HOSTEDZONEID --change-batch file:///tmp/record.json | jq
+
+}
+
+if [ "$1" == "all "] ; then 
+    for component in frontend mongodb catalogue cart user mysql redis rabbitmq shipping payment ; do 
+        COMPONENT=$component 
+        create_server
+    done
+else 
+        create_server
+fi
 
 
 
